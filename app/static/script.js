@@ -14,14 +14,14 @@ var color=[255,0,0]
 var degree=1;
 var lineWidth=12;
 
-bgimage.src = "static/img/meta/input.jpg";
-bgimage.onload=function(){
-    window.ctx.drawImage(bgimage, 0, 0, canvas.width, canvas.height);
-}
+// bgimage.src = "static/img/meta/input.jpg";
+// bgimage.onload=function(){
+//     window.ctx.drawImage(bgimage, 0, 0, canvas.width, canvas.height);
+// }
 
 function reset(){
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.ctx.drawImage(bgimage, 0, 0, bgimage.width, bgimage.height);
+    // this.ctx.drawImage(bgimage, 0, 0, bgimage.width, bgimage.height);
 
 }
 
@@ -88,6 +88,12 @@ function touchStart(e){
 function touchMove(e){
     this.touch=e.targetTouches[0];
     if (this.draw){
+        if(mode=='pencil'){
+            this.ctx.globalCompositeOperation="source-over";    
+        }else{
+            this.ctx.globalCompositeOperation="destination-out";
+        }
+        
         this.ctx.lineTo(this.touch.pageX-this.offsetX,this.touch.pageY-this.offsetY);
         this.ctx.stroke();
     }
@@ -106,7 +112,8 @@ function clearPad(){
 }
 
 
-function set_color(r,g,b){
+function set_color(r,g,b){    
+    this.mode='pencil'
     this.color[0]=r;
     this.color[1]=g;
     this.color[2]=b;
@@ -130,6 +137,7 @@ function init(){
         window.lineWidth = this.value;
         set_prop();
     };
+    
     pencil()
 }
 // pencil tool
@@ -153,7 +161,6 @@ function eraser(){
 
 function save(){
     
-
     var filename = document.getElementById("fname").value;
     if (filename){
         var image = canvas.toDataURL("image/png");
@@ -198,26 +205,32 @@ function set_prop(){
         degree_pixel = (this.color[2]+parseInt(this.degree)*range).toString();
         window.ctx.strokeStyle = 'rgb('+this.color[0]+','+this.color[1]+','+degree_pixel+')';
         window.ctx.fillStyle = 'rgb('+this.color[0]+','+this.color[1]+','+degree_pixel+')';
+        color_value.innerHTML = '1';
     }else if(this.color[0]=== 0 && this.color[1]===255 && this.color[2] === 255){
         degree_pixel = (this.color[0]+parseInt(this.degree)*range).toString();
         window.ctx.strokeStyle = 'rgb('+degree_pixel+','+this.color[1]+','+this.color[2]+')';
         window.ctx.fillStyle = 'rgb('+degree_pixel+','+this.color[1]+','+this.color[2]+')';
+        color_value.innerHTML = '2';
     }else if(this.color[0]=== 0 && this.color[1]===0 && this.color[2] === 255){
-        degree_pixel = (this.color[0]+parseInt(this.degree)*range).toString();
-        window.ctx.strokeStyle = 'rgb('+degree_pixel+','+this.color[1]+','+this.color[2]+')';
-        window.ctx.fillStyle = 'rgb('+degree_pixel+','+this.color[1]+','+this.color[2]+')';
+        degree_pixel = (this.color[1]+parseInt(this.degree)*range).toString();
+        window.ctx.strokeStyle = 'rgb('+this.color[0]+','+degree_pixel+','+this.color[2]+')';
+        window.ctx.fillStyle = 'rgb('+this.color[0]+','+degree_pixel+','+this.color[2]+')';
+        color_value.innerHTML = '3';
     }else if(this.color[0]=== 0 && this.color[1]===210 && this.color[2] === 87){
         degree_pixel = (this.color[0]+parseInt(this.degree)*range).toString();
         window.ctx.strokeStyle = 'rgb('+degree_pixel+','+this.color[1]+','+this.color[2]+')';
         window.ctx.fillStyle = 'rgb('+degree_pixel+','+this.color[1]+','+this.color[2]+')';
+        color_value.innerHTML = '4';
     }else if(this.color[0]=== 255 && this.color[1]===153 && this.color[2] === 0){
         degree_pixel = (this.color[2]+parseInt(this.degree)*range).toString();
         window.ctx.strokeStyle = 'rgb('+this.color[0]+','+this.color[1]+','+degree_pixel+')';
         window.ctx.fillStyle = 'rgb('+this.color[0]+','+this.color[1]+','+degree_pixel+')';
-    }else if(this.color[0]=== 255 && this.color[1]===0 && this.color[2] === 255){
-        degree_pixel = (this.color[1]+parseInt(this.degree)*range).toString();
-        window.ctx.strokeStyle = 'rgb('+this.color[0]+','+degree_pixel+','+this.color[2]+')';
-        window.ctx.fillStyle = 'rgb('+this.color[0]+','+degree_pixel+','+this.color[2]+')';
+        color_value.innerHTML = '5';
+    }else if(this.color[0]=== 255 && this.color[1]===255 && this.color[2] === 0){
+        degree_pixel = (this.color[2]+parseInt(this.degree)*range).toString();
+        window.ctx.strokeStyle = 'rgb('+this.color[0]+','+this.color[1]+','+degree_pixel+')';
+        window.ctx.fillStyle = 'rgb('+this.color[0]+','+this.color[1]+','+degree_pixel+')';
+        color_value.innerHTML = '6';
     }else{
         console.log("else")
     }

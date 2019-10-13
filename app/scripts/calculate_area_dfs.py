@@ -25,7 +25,7 @@ def AreaProcesser(input_image):
         'orange':[list() for i in range(10)],
         'red':[list() for i in range(10)],
         'cyan':[list() for i in range(10)],
-        'pink':[list() for i in range(10)]
+        'yellow':[list() for i in range(10)]
     }
     
     img = input_image
@@ -56,11 +56,11 @@ def AreaProcesser(input_image):
                 dfs(color,i,j,pixel_list[i*width+j].group,degree)
                 
 
-    for k,v in Group_list.items():
-        for p in range(len(v)):
-            if len(v[p])>0:
-                for a in v[p]:
-                    print("Color: ",k,"degree", p ,"pixel num: ",len(a))
+    # for k,v in Group_list.items():
+    #     for p in range(len(v)):
+    #         if len(v[p])>0:
+    #             for a in v[p]:
+    #                 print("Color: ",k,"degree", p ,"pixel num: ",len(a))
     return Group_list
 
     
@@ -90,14 +90,14 @@ def checkProp(pixel):
         return ('red', checkDegree(pixel[2]))
     elif pixel[0] in range(0,160) and pixel[1] in range(245,256) and pixel[2] in range(245,256):
         return ('cyan', checkDegree(pixel[0]))
-    elif pixel[0] in range(0,160) and pixel[1] in range(0,10) and pixel[2] in range(245,256):
-        return ('blue', checkDegree(pixel[0]))
+    elif pixel[0] in range(0,10) and pixel[1] in range(0,160) and pixel[2] in range(245,256):
+        return ('blue', checkDegree(pixel[1]))
     elif pixel[0] in range(0,160) and pixel[1] in range(200,220) and pixel[2] in range(77,97):
         return ('green', checkDegree(pixel[0]))
     elif pixel[0] in range(245,256) and pixel[1] in range(143,163) and pixel[2] in range(0,160):
         return ('orange', checkDegree(pixel[2]))
-    elif pixel[0] in range(245,256) and pixel[1] in range(0,160) and pixel[2] in range(245,256):
-        return ('pink', checkDegree(pixel[1]))
+    elif pixel[0] in range(245,256) and pixel[1] in range(245,256) and pixel[2] in range(0,160):
+        return ('yellow', checkDegree(pixel[2]))
     else:
         return ('empty', checkDegree(pixel[0]))
 

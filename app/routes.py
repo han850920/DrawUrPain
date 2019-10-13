@@ -27,35 +27,33 @@ def paintapp():
 
         im = Image.open(image_bytes)
 
-        # im = im.convert('RGB')
+
 
         arr = np.array(im)
         start =time.time()
         Group_list = AreaProcesser(arr)
         print("execution time: ",str(time.time()-start))
         body_area = 36407.5 # sorry, but I have to hard code...
-        # for k,v in Group_list.items():
-        #     for i,p in enumerate(v):
-                
-        #         cv2.putText(arr, str(i) , (p[0][1],p[0][0]), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0,0,0), 2)
-        #         text = "Color: "+str(k)+" "+str(i)+" Affect ratio: "+str((len(p)/body_area)*100) +" %\n"
-        #         f = open("app/static/txt/"+ filename + ".txt", "a")
-        #         f.write(text)
-        #         f.close()
         ID=1
         for k,v in Group_list.items():
             for p in range(len(v)):
                 if len(v[p])>0:
                     for a in v[p]:
                         if(len(a)>10):
-                            cv2.putText(arr, str(ID) , (a[0][1],a[0][0]), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0,0,0), 2)
-                            text = "ID: "+str(ID)+ " Color: "+str(k)+" "+"Degree: "+ str(p) +" Affect ratio: "+str((len(a)/body_area)*100) +" %\n"
+                            cv2.putText(arr, str(ID) , (a[0][1],a[0][0]), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0,0,0,255), 2)
+                            text = "ID: "+str(ID)+ " Color: "+str(k)+" "+"Degree: "+ str(p+1) +" Affect ratio: "+str((len(a)/body_area)*100) +" %\n"
                             f = open("app/static/txt/"+ filename + ".txt", "a")
                             f.write(text)
                             f.close()
                             ID+=1
-        new_im = Image.fromarray(arr)
-        new_im.save("app/static/img/" + filename + ".png")
+
+        mark_area = Image.fromarray(arr,"RGBA")
+        
+        bg_im=Image.open("app/static/img/meta/input.jpg")
+        new_im2 = Image.new('RGBA', size=(375, 480), color=(0, 0, 0, 0))
+        new_im2.paste(bg_im,(0,0))
+        new_im2.paste(mark_area,(0,0),mark_area)
+        new_im2.save("app/static/img/" + filename + ".png","PNG")
 
         return render_template("paint.html") 
 
@@ -93,9 +91,3 @@ def downloadTxt(filename):
 
 
 
-
-def chooseMarkColor(color):
-    if color=='red':
-        return (238,0,0)
-    elif color =='orange':
-        return ()
