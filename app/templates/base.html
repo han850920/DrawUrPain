@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Paint App</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/meta/favicon.ico') }}">
+</head>
+<body>
+    <div align="right">
+    <a href="/">Home</a>
+    |<a href="/">Gallery</a>
+    </div>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>
+

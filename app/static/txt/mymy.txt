@@ -1,0 +1,7 @@
+ID: 1 Color: blue Degree: 4 Affect ratio: 1.557371420723752 %
+ID: 2 Color: red Degree: 0 Affect ratio: 0.8789397788917118 %
+ID: 3 Color: cyan Degree: 6 Affect ratio: 0.8130192954748335 %
+ID: 4 Color: cyan Degree: 9 Affect ratio: 1.6782256403213625 %
+ID: 5 Color: green Degree: 3 Affect ratio: 1.392570212181556 %
+ID: 6 Color: green Degree: 7 Affect ratio: 1.584838288814118 %
+ID: 7 Color: pink Degree: 4 Affect ratio: 1.645265398612923 %
