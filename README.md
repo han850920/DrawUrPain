@@ -1,4 +1,5 @@
-Paintapp-Flask-PostgreSQL
+DrawUrPain
 =========================
 
 Paint application using Flask, JavaScript.
+
