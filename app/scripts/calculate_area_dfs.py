@@ -51,6 +51,7 @@ def AreaProcesser(input_image):
             current_pixel = pixel_list[i*width+j]
             # It's new group, assign group by known group num
             if current_pixel.group == -1:
+                print( len(Group_list[color][degree]))
                 current_pixel.group = len(Group_list[color][degree])
                 Group_list[color][degree].append([(i,j)])
                 dfs(color,i,j,pixel_list[i*width+j].group,degree)
@@ -102,5 +103,6 @@ def checkProp(pixel):
         return ('empty', checkDegree(pixel[0]))
 
 def checkDegree(degree_pixel):
-    return int(round(degree_pixel/15)-1)
+
+    return max(min(int(round(degree_pixel/15)-1),9),0)
     
