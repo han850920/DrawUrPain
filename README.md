@@ -7,7 +7,7 @@ This project that allows the patient to draw the injured area in arbitrary shape
 This gadget will calculate the percentage of total skin area to assist some medical researches. 
 
 <p align="center">
-  <img width="500" height="600" src="UI.png">
+  <img width="300" height="360" src="UI.png">
 </p>
 
 Although there some Apps also provide coverage calculation, they are not totally free or just suuport fixed shape only.
