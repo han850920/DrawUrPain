@@ -1,21 +1,69 @@
 {% include "base.html" %}
 {% block content %}  
+<p><h2>Unzip files</h2></p>
+<table class="table">
+    {% if complete_file_list %}
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Create Time</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for file in complete_file_list %}
+            <tr>
+                <th scope="row">{{file[0]}}</th>
+                <td>{{file[1]}}</td>
+            </tr>
+
+        {% endfor %}
+        <tr>
+            <th scope="row"></th>
+            <td>
+                <input id="download" type="text">
+            </td>
+            <td>
+                <button type='submit' onclick="download()">Zip all file</button>
+            </td>
+        </tr>
+    </tbody>
+    {%else%}
+    <p>No new create files</p>
+    {% endif %}
+</table>
+
+
 <p><h2>Saved files</h2></p>
-    
-{% if files %}
-<ol>
-    {% for file in files %}
-        <li><p style="color: blue; cursor: pointer;">{{ file[1] }}</p></li>       
-    {% endfor %}
-</ol>
-{% endif %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Saved Time</th>
+        <th scope="col">Download</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if saved_files %}
+        {% for file in saved_files %}
+            <tr>
+                <th scope="row">{{file[0]}}</th>
+                <td>{{file[1]}}</td>
+                <td>
+                    <form action=" /download/zip/{{file[0]}} " method="get">
+                        <button type='submit'>Download</button>
+                    </form>
+                </td>
+            </tr>
 
-<form action="{{ url_for('search') }}" method="post">
-    <p><label>filename</label><input name="fname" type="text">
-    <input type="submit" value="show"></p>
-</form>   
+        {% endfor %}
+    {% endif %}
+    </tbody>
+  </table>
 
-<script src=" {{ url_for('static', filename='save.js') }}"></script>
+
+
+  <script src=" {{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}
 
 

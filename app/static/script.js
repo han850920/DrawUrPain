@@ -14,10 +14,6 @@ var color=[255,0,0]
 var degree=1;
 var lineWidth=12;
 
-// bgimage.src = "static/img/meta/input.jpg";
-// bgimage.onload=function(){
-//     window.ctx.drawImage(bgimage, 0, 0, canvas.width, canvas.height);
-// }
 
 function reset(){
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -173,14 +169,14 @@ function save(){
             
             data:JSON.stringify(d),
             success: function(response) {
-                alert(filename + " is completed calculated !!!");
+                alert(filename + " has been submitted, please wait a few minutes!");
             },
             error: function(xhr) {
                 //Do Something to handle error
                 console.log("error");
             }
             });
-        alert(filename + " saved");
+        alert("File Name:"+filename);
     }
     else{
         alert("Please enter the filename !!!");
