@@ -36,7 +36,7 @@ def saved():
     for f in files:
         img_dir = os.path.join(path,f)
         img_file = os.listdir(img_dir)
-        if len(img_file) == 2:
+        if len(img_file) > 0:
             date_time = datetime.fromtimestamp(os.path.getmtime(img_dir)).strftime('%Y-%m-%d %H:%M:%S')
             complete_file_list.append((f, date_time))
     complete_file_list.sort(key=lambda x: x[1],reverse=True)
